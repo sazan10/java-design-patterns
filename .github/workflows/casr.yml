@@ -25,14 +25,10 @@ jobs:
         sudo apt install gdb lsb-release
     - name: Install casr
       run: |
-        mkdir -p ./report
         cargo install casr
     - name: Compile using maven
       run: |
         mvn clean install -DskipTests -Dcheckstyle.skip
     - name: Run CASR
       run: |
-        find . -name '*.jar' | while read -r jarfile; do
-          echo "Processing $jarfile"
-          casr-java -o "$jarfile.casrep" -- java -cp report "$classfile_rel"
-        done
+        find . -name '*.jar' -exec sh -c 'echo "Processing {}" && casr-java -o {}.casrep -- java -jar {}' \;
