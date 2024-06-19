@@ -32,7 +32,7 @@ jobs:
         mvn clean install -DskipTests -Dcheckstyle.skip
     - name: Run CASR
       run: |
-        find . -name '*.java' | while read -r javafile; do
-          echo "Processing $javafile"
-          casr-java -o "$javafile.casrep" -- java -cp report "$classfile_rel"
+        find . -name '*.jar' | while read -r jarfile; do
+          echo "Processing $jarfile"
+          casr-java -o "$jarfile.casrep" -- java -cp report "$classfile_rel"
         done
