@@ -31,4 +31,4 @@ jobs:
         mvn clean install -DskipTests -Dcheckstyle.skip
     - name: Run CASR
       run: |
-        find . -name '*.jar' -exec sh -c 'echo "Processing {}" &&  && timeout 60s casr-java -o {}.casrep -- java -jar {}' \;
+        find . -name '*.jar' -exec sh -c 'echo "Processing {}" && timeout 60s casr-java -o {}.casrep -- java -jar {}' \;
