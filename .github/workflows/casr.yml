@@ -32,3 +32,6 @@ jobs:
     - name: Run CASR
       run: |
         find . -name '*.jar' -exec sh -c 'echo "Processing {}" && timeout 60s casr-java -o {}.casrep -- java -jar {}' \;
+    - name: List any casr reports created
+      run: |
+        find ./ -name "*.casrep" 
