@@ -51,8 +51,9 @@ jobs:
       run: |
         mvn clean install -DskipTests -Dcheckstyle.skip
     - name: Run Codepulse
-      run: |        
-        find . -name '*.jar' | head -n 1 | xargs -I {} sh -c 'echo "Processing {}" && java -javaagent:codepulse/tracers/java/agent.jar=localhost:8765 -jar "{}"'
+      run: |  
+        export CODE_PULSE_TRACE_SKIP_ACK="yes"
+        find . -name '*.jar' -print -quit | xargs -I {} sh -c 'echo "Processing {}" && java -javaagent:codepulse/tracers/java/agent.jar=localhost:8765;projectId=1 -jar "{}"'
     - name: List any casr reports created
       run: |
         # find ./ -name "*.casrep" 
